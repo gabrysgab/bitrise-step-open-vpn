@@ -59,16 +59,19 @@ EOF
     echo "Configuring for Mac OS"
 
     echo "-----BEGIN CERTIFICATE-----" > ca.crt
-    echo ${ca_crt} >> ca.crt
+    echo ${ca_crt} | base64 -D >> ca.crt
     echo -e "\n-----END CERTIFICATE-----" >> ca.crt
 
     echo "-----BEGIN CERTIFICATE-----" > client.crt
-    echo ${client_crt} >> client.crt
+    echo ${client_crt} | base64 -D >> client.crt
     echo -e "\n-----END CERTIFICATE-----" >> client.crt
 
+    # Print out the contents of client.crt
+    echo "Contents of client.crt:"
+    cat client.crt
 
-    echo "-----BEGIN RSA PRIVATE KEY-----" > client.key
-    echo ${client_key} >> client.key
+    echo "-----BEGIN PRIVATE KEY-----" > client.key
+    echo ${client_key} | base64 -D >> client.key
     echo -e "\n-----END PRIVATE KEY-----" >> client.key
 
     echo ""
