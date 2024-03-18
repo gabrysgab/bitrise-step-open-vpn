@@ -64,7 +64,14 @@ EOF
     echo ""
 
     echo "Run openvpn"
-      sudo openvpn --client --dev tun --proto "${proto}" --remote "${host}" "${port}" --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key --auth-user-pass <(printf "%s\n%s" "${VPN_USERNAME}" "${VPN_PASSWORD}") > "$log_path" 2>&1 &
+      temp_file=$(mktemp)
+      echo -e "${VPN_USERNAME}\n${VPN_PASSWORD}" > "$temp_file"
+
+      # Run OpenVPN with the temporary file
+      sudo openvpn --client --dev tun --proto "${proto}" --remote "${host}" "${port}" --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key --auth-user-pass "$temp_file" > "$log_path" 2>&1 &
+
+      # Clean up the temporary file
+      rm "$temp_file"
     echo "Done"
     echo ""
 
