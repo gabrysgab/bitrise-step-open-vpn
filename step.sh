@@ -64,7 +64,7 @@ EOF
     echo ""
 
     echo "Run openvpn"
-      sudo openvpn --client --dev tun --proto ${proto} --remote ${host} ${port} --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key --auth-user-pass <(echo -e "${VPN_USERNAME}\n${VPN_PASSWORD}") > $log_path 2>&1 &
+      sudo openvpn --client --dev tun --proto "${proto}" --remote "${host}" "${port}" --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key --auth-user-pass <(printf "%s\n%s" "${VPN_USERNAME}" "${VPN_PASSWORD}") > "$log_path" 2>&1 &
     echo "Done"
     echo ""
 
