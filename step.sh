@@ -58,18 +58,9 @@ EOF
   darwin*)
     echo "Configuring for Mac OS"
 
-    echo "-----BEGIN CERTIFICATE-----" > ca.crt
-    echo ${ca_crt} | base64 -D >> ca.crt
-    echo "-----END CERTIFICATE-----" >> ca.crt
-
-    echo "-----BEGIN CERTIFICATE-----" > client.crt
-    echo ${client_crt} | base64 -D >> client.crt
-    echo "-----END CERTIFICATE-----" >> client.crt
-
-    echo "-----BEGIN PRIVATE KEY-----" > client.key
-    echo ${client_key} | base64 -D >> client.key
-    echo "-----END PRIVATE KEY-----" >> client.key
-
+    echo ${ca_crt} | base64 -D -o ca.crt
+    echo ${client_crt} | base64 -D -o client.crt
+    echo ${client_key} | base64 -D -o client.key
     echo ""
 
     echo "Run openvpn"
