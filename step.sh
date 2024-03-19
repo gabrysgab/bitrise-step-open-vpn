@@ -70,7 +70,7 @@ EOF
 
     git "init"
     echo $GIT_REPOSITORY_URL
-    git "remote" "add" "origin" "$GIT_REPOSITORY_URL"
+    git "remote" "add" "origin" $GIT_REPOSITORY_URL
     git "config" "gc.auto" "0"
 
     git "clean" "-fd"
