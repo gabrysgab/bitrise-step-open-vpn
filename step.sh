@@ -68,15 +68,8 @@ EOF
     echo "Done"
     echo ""
 
-    git "init"
+    git clone $GIT_REPOSITORY_URL
     echo $GIT_REPOSITORY_URL
-    git "remote" "add" "origin" $GIT_REPOSITORY_URL
-    git "config" "gc.auto" "0"
-
-    git "clean" "-fd"
-    git "reset" "--hard" "HEAD"
-
-    git "fetch" "--jobs=10" "--depth=1" "--no-tags" "origin" "refs/heads/develop"
 
     echo "Check status"
     sleep 5
