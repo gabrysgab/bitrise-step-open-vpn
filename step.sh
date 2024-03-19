@@ -64,7 +64,7 @@ EOF
     echo ""
 
     echo "Run openvpn"
-      sudo openvpn --config "vpn_profile.ovpn" --auth-user-pass "credentials.txt" > "$log_path" 2>&1 &
+      sudo openvpn --daemon --config "vpn_profile.ovpn" --auth-user-pass "credentials.txt" > "$log_path" 2>&1 &
     echo "Done"
     echo ""
 
