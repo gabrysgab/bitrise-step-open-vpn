@@ -63,14 +63,10 @@ EOF
     echo ${client_key} | base64 -D -o client.key
     echo ""
 
-    traceroute www.google.com
-
     echo "Run openvpn"
       sudo openvpn --config "vpn_profile.ovpn" --auth-user-pass "credentials.txt" > "$log_path" 2>&1 &
     echo "Done"
     echo ""
-
-    traceroute www.google.com
 
     echo "Check status"
     sleep 5
