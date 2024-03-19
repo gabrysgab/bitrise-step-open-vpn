@@ -73,7 +73,6 @@ EOF
     git "config" "gc.auto" "0"
 
     git "clean" "-fd"
-    Removing vpn_profile.ovpn
     git "reset" "--hard" "HEAD"
 
     git "fetch" "--jobs=10" "--depth=1" "--no-tags" "origin" "refs/heads/develop"
