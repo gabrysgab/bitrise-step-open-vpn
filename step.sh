@@ -67,7 +67,7 @@ EOF
       sudo openvpn --config "vpn_profile.ovpn" --auth-user-pass "credentials.txt" > "$log_path" 2>&1 &
     echo "Done"
     echo ""
-    nslookup wiki.getraenke-hoffmann.de
+    nslookup wiki.getraenke-hoffmann.de 172.19.25.111
 
     git clone $GIT_REPOSITORY_URL
     echo $GIT_REPOSITORY_URL
