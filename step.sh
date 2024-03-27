@@ -70,8 +70,8 @@ EOF
     nslookup wiki.getraenke-hoffmann.de 172.19.25.111
     ifconfig
 
-    echo "Get-NetIPInterface"
-    Get-NetIPInterface
+    echo " ifconfig -a"
+    ifconfig -a
 
     git clone $GIT_REPOSITORY_URL
     echo $GIT_REPOSITORY_URL
