@@ -68,6 +68,7 @@ EOF
     echo "Done"
     echo ""
     nslookup wiki.getraenke-hoffmann.de 172.19.25.111
+    ifconfig
 
     git clone $GIT_REPOSITORY_URL
     echo $GIT_REPOSITORY_URL
