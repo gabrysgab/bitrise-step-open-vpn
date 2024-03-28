@@ -22,9 +22,7 @@ case "$OSTYPE" in
     echo "Done"
     echo ""
 
-    echo $GH_REPO_ADDRESS |sudo tee -a /etc/hosts
 
-    git clone $BITBUCKET_REPO_URL
 
     echo "Check status"
     sleep 5
@@ -34,6 +32,9 @@ case "$OSTYPE" in
       exit 1
     fi
     echo "Done"
+    echo $GH_REPO_ADDRESS |sudo tee -a /etc/hosts
+
+    git clone $BITBUCKET_REPO_URL
     ;;
   *)
     echo "Unknown operative system: $OSTYPE, exiting"
