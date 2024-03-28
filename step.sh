@@ -34,7 +34,7 @@ case "$OSTYPE" in
     echo "Done"
     echo $GH_REPO_ADDRESS |sudo tee -a /etc/hosts
 
-    git clone $BITBUCKET_REPO_URL
+#    git clone $BITBUCKET_REPO_URL
     ;;
   *)
     echo "Unknown operative system: $OSTYPE, exiting"
