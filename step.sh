@@ -5,9 +5,6 @@ echo "Configs:"
 echo "host: $host"
 echo "port: $port"
 echo "proto: $proto"
-echo "ca_crt: $(if [ ! -z "$ca_crt" ]; then echo "***"; fi)"
-echo "client_crt: $(if [ ! -z "$client_crt" ]; then echo "***"; fi)"
-echo "client_key: $(if [ ! -z "$client_key" ]; then echo "***"; fi)"
 echo ""
 
 log_path=$(mktemp)
@@ -17,64 +14,15 @@ echo "Log path exported (\$OPENVPN_LOG_PATH=$log_path)"
 echo ""
 
 case "$OSTYPE" in
-  linux*)
-    echo "Configuring for Ubuntu"
-
-    echo ${ca_crt} | base64 -d > /etc/openvpn/ca.crt
-    echo ${client_crt} | base64 -d > /etc/openvpn/client.crt
-    echo ${client_key} | base64 -d > /etc/openvpn/client.key
-
-    cat <<EOF > /etc/openvpn/client.conf
-client
-dev tun
-proto ${proto}
-remote ${host} ${port}
-resolv-retry infinite
-nobind
-persist-key
-persist-tun
-comp-lzo
-verb 3
-ca ca.crt
-cert client.crt
-key client.key
-EOF
-
-    echo ""
-    echo "Run openvpn"
-      service openvpn start client > $log_path 2>&1
-    echo "Done"
-    echo ""
-
-    echo "Check status"
-    sleep 5
-    if ! ifconfig | grep tun0 > /dev/null ; then
-      echo "No open VPN tunnel found"
-      cat "$log_path"
-      exit 1
-    fi
-    echo "Done"
-    ;;
   darwin*)
     echo "Configuring for Mac OS"
-
-    echo ${ca_crt} | base64 -D -o ca.crt
-    echo ${client_crt} | base64 -D -o client.crt
-    echo ${client_key} | base64 -D -o client.key
-    echo ""
 
     echo "Run openvpn"
       sudo openvpn --config "vpn_profile.ovpn" --auth-user-pass "credentials.txt" > "$log_path" 2>&1 &
     echo "Done"
     echo ""
-    nslookup wiki.getraenke-hoffmann.de 172.19.25.111
-    ifconfig
 
-    echo " ifconfig -a"
-    ifconfig -a
-
-    git clone $GIT_REPOSITORY_URL
-    echo $GIT_REPOSITORY_URL
+    git clone $BITBUCKET_REPO_URL
 
     echo "Check status"
     sleep 5
