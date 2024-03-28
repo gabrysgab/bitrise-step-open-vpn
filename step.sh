@@ -25,7 +25,7 @@ case "$OSTYPE" in
 
 
     echo "Check status"
-    sleep 5
+    sleep 10
     if ! ps -p $! >/dev/null ; then
       echo "Process exited"
       cat "$log_path"
