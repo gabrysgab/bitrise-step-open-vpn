@@ -22,6 +22,8 @@ case "$OSTYPE" in
     echo "Done"
     echo ""
 
+    echo $GH_REPO_ADDRESS |sudo tee -a /etc/hosts
+
     git clone $BITBUCKET_REPO_URL
 
     echo "Check status"
